@@ -1,0 +1,16 @@
+hosts: nexus
+become: yes
+tasks:
+  - name: copy kubernetes script file into kubernetes master server
+    copy:
+      src: kubernetes-deploy.sh
+      dest /tmp/
+  - name: move shript file into root dir
+    copy: 
+      src: /tmp/kubernetes-deploy.sh
+      dest: /root
+      remote_src: yes
+   - name: execute script file
+     shell: chmod 755 kubernetes-deploy.sh && bash ./kubernetes-deploy.sh
+   
+     
